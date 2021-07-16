@@ -147,7 +147,6 @@
                 padding: 8px;
                 font-family: 'Montserrat', sans-serif;
                 border-collapse: collapse;
-                /*                border-radius: 0.8em;*/
                 width: 95%;
                 text-align: center;
             }
@@ -198,28 +197,25 @@
                 width: 5px;
             }
 
-            /* Track */
             ::-webkit-scrollbar-track {
                 background: #f1f1f1; 
             }
 
-            /* Handle */
             ::-webkit-scrollbar-thumb {
                 background: #910707; 
             }
 
-            /* Handle on hover */
             ::-webkit-scrollbar-thumb:hover {
                 background: #555; 
             }
 
             .pageHeader {
-                text-align: center; /*responsive*/
+                text-align: center;
                 color: #910707;
                 font-size: 25px;
                 font-family: 'Montserrat';
                 font-weight: bold;
-                width: 100%; /*responsive*/
+                width: 100%;
             }
 
             .search{
@@ -326,7 +322,6 @@
             }
         </script>
         <%
-            //can only access page when logged in
             response.setHeader("Cache-Control",
                     "no-cache, no-store, must-revalidate");
 

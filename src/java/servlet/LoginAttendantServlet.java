@@ -60,7 +60,7 @@ public class LoginAttendantServlet extends HttpServlet {
                 
                 if (verify) {
                     HttpSession session = request.getSession();
-                        session.setAttribute("password", encryptedPass); //sets the password as the session id
+                        session.setAttribute("password", encryptedPass);
                         request.getRequestDispatcher("attendantHome.jsp").forward(request, response);
                 } else {
                     request.getRequestDispatcher("error.jsp").include(request, response);

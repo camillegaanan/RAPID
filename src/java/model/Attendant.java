@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package model;
 
 import com.itextpdf.text.BaseColor;
@@ -210,16 +206,14 @@ public class Attendant extends Role {
         java.sql.Date fileDate = new java.sql.Date(millis);
 
         String desktopPath = System.getProperty("user.home") +
-                "/Desktop/UTZ Charge Slip"; //OG
-//                String desktopPath = "D:/Media/Desktop/UTZ Charge Slip"; //for testing
+                "/Desktop/UTZ Charge Slip"; 
         String path = desktopPath.replace("\\", "/");
         String path2 = path + "/" + p.getFamilyName() + "_" + p.getFirstName() +
                 "_" + fileDate +
                 ".pdf";
 
         File file = new File(System.getProperty("user.home") +
-                "\\Desktop\\UTZ Charge Slip"); //comment this back after
-//                File file = new File("D:\\Media\\Desktop\\UTZ Charge Slip"); //for testing only
+                "\\Desktop\\UTZ Charge Slip"); 
         file.mkdir();
 
         Document doc = new Document(PageSize.LETTER, 50, 50, 50, 50);
@@ -254,7 +248,6 @@ public class Attendant extends Role {
 
             Paragraph space = new Paragraph(" ");
 
-            //Place paragraphs into a table
             PdfPTable infoPTable = new PdfPTable(2);
             infoPTable.setWidthPercentage(100);
             infoPTable.getDefaultCell().setBorder(0);
@@ -284,7 +277,6 @@ public class Attendant extends Role {
             infoPTable.addCell("Transaction Date & Time: " + dateToday + " " +
                     timeToday);
 
-            //to give the AGE
             java.util.Date birthdate = date.parse(p.getBirthday());
             Calendar c = Calendar.getInstance();
             c.setTime(birthdate);
@@ -299,7 +291,6 @@ public class Attendant extends Role {
             infoPTable.addCell("Mode of Payment: " + r.getModeOfPayment().
                     toUpperCase());
 
-            //to select columns that will be printed
             String query =
                     "SELECT typeoftransaction AS \"Type of Ultrasound\", price AS \"Price\" FROM Recorddb INNER JOIN PatientDB ON patientDB.patientID=recorddb.patientID WHERE recorddb.patientid = ? AND datetoday = ?"; // do you think 2x pupunta yung patient sa isang araw na hiwalay transaction?
             PreparedStatement ps = con.prepareStatement(query);
@@ -312,7 +303,7 @@ public class Attendant extends Role {
             PdfPTable pTable = new PdfPTable(2);
             Font boldFont = new Font(Font.FontFamily.HELVETICA, 12,
                     Font.BOLD);
-            //Table Header
+           
             for (int i = 1; i <= colCount; i++) {
                 PdfPCell cell = new PdfPCell();
                 Paragraph p1 = new Paragraph(records.getMetaData().
@@ -325,28 +316,11 @@ public class Attendant extends Role {
             }
             while (records.next()) {
                 for (int i = 1; i <= colCount; i++) {
-//                    PdfPCell cell = new PdfPCell();
-//                    Paragraph p1 = new Paragraph(Security.decrypt(records.getString(
-//                            records.getMetaData().getColumnName(i))));
-//                    p1.setSpacingAfter(10);
-                    
-//                    pTable.addCell(Security.decrypt(records.getString(
-//                            records.getMetaData().getColumnName(i))));
-//                    if ((i + 1) <= colCount) {
-//                        p1.setAlignment(Element.ALIGN_RIGHT);
-//                        sum += Integer.parseInt(Security.decrypt(
-//                                records.getString(records.getMetaData().
-//                                        getColumnName(i + 1))));
-//                    }
-                    
-//                    cell.addElement(p1);
-//                    pTable.addCell(cell);
                     
                     if (i == 1) {
                         PdfPCell cell = new PdfPCell();
                         Paragraph p1 = new Paragraph(Security.decrypt(records.getString(
                             records.getMetaData().getColumnName(i))));
-//                        p1.setAlignment(Element.ALIGN_CENTER);
                         p1.setSpacingAfter(10);
                         cell.addElement(p1);
                         pTable.addCell(cell);

@@ -12,7 +12,6 @@
                 background-image: url('images/bg.png');
                 background-size: cover;
                 background-repeat: no-repeat;
-                /*padding-bottom: 15%; /*responsive*/
             }
             
             .buttonCon{
@@ -30,13 +29,11 @@
             
             .form{
                 background-color: #FFFFFF;
-/*                position: absolute;*/
                 align-content: center;
-                /*top: 60px; left:300px; bottom: 120px; right: 200px;*/
-                width: 35%; /*580px;*/
-                height: 65%; /*450px;*/
-                margin-top: 5%;/*85px;*/
-                margin-left: 33%; /*270px;*/
+                width: 35%;
+                height: 65%;
+                margin-top: 5%;
+                margin-left: 33%;
                 border-radius: 4.5em;
                 box-shadow: 0px 22px 55px 2px rgba(0, 0, 0, 0.44);
                 margin: auto;
@@ -52,14 +49,6 @@
             .qr{
                 width: 50%;
                 height: 25%;
-/*                width: 50%;300px;
-                align-content: center;
-                position: absolute;
-                left: 51%;
-                top: 10px; left: 130px; bottom: 200px; right: 200px;
-                size: 10%; 200px;
-                margin-left: 15px;
-                margin-top: 10px;*/
             }
             
             .newP{
@@ -68,7 +57,6 @@
                 font-weight: bold;
                 font-size: 22px;
                 position: absolute;
-                /*top: -30px; left: 155px; bottom: 150px; right: 150px;*/
                 
             }
             
@@ -82,8 +70,6 @@
                 top: 20%;
                 width: 10%;
                 padding-left: 3%;
-/*                position: absolute;*/
-/*                top: 300px; left: 150px; bottom: 100px; right: 140px;*/
             }
             
             .out , .cont {
@@ -110,10 +96,6 @@
                 display: flex;
                 width: 20%;
                 padding-left: 42%;
-                /*                width: 100%;*/
-/*                margin-left: 43%;
-                position: fixed;
-                margin-top: 32%;*/
             }
             
             #l2, #r2{
@@ -123,9 +105,6 @@
             }
            
             #marg{
-/*                position: relative;
-                top: 360px; left: 170px; bottom: 120px; right: 200px;
-                padding-top: 10px;*/
                 margin-bottom: 5%;
             }
             .up{
@@ -153,12 +132,12 @@
             }
             
             .pageHeader {
-                text-align: center; /*responsive*/
+                text-align: center;
                 color: #910707;
                 font-size: 25px;
                 font-family: 'Montserrat';
                 font-weight: bold;
-                width: 100%; /*responsive*/
+                width: 100%; 
             }
             
         </style>
@@ -166,7 +145,6 @@
     <body>
         
     <%  
-            //can only access page when logged in
             response.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
                 
             if(session.getAttribute("password")== null || session.getAttribute("username")== null){

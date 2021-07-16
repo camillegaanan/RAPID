@@ -11,7 +11,6 @@
         <h1>Hello World!</h1>
         
     <%  
-            //can only access page when logged in
             response.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
                 
             if(session.getAttribute("username")== null){

@@ -16,7 +16,6 @@
                 background-image: url('images/bg.png');
                 background-size: cover;
                 background-repeat: no-repeat;
-                /*padding-bottom: 15%; /*responsive*/
             }
 
             .up{
@@ -62,14 +61,13 @@
                 height: 150px;
                 width: 310px;
                 overflow-y: auto;
-                border-collapse: collapse; /* Collapse borders */
+                border-collapse: collapse;
                 font-size: 15px;
                 margin-left: -110px;
                 align-self: stretch;
             }
 
             .exist-t tr {
-                /* Add a bottom border to all table rows */
                 border-bottom: 1px solid #ddd;
                 background-color: white;
             }
@@ -78,17 +76,14 @@
                 width: 5px;
             }
 
-            /* Track */
             ::-webkit-scrollbar-track {
                 background: #f1f1f1; 
             }
 
-            /* Handle */
             ::-webkit-scrollbar-thumb {
                 background: #910707; 
             }
 
-            /* Handle on hover */
             ::-webkit-scrollbar-thumb:hover {
                 background: #555; 
             }
@@ -258,7 +253,6 @@
         </script>
 
         <%
-            //can only access page when logged in
             response.setHeader("Cache-Control",
                     "no-cache, no-store, must-revalidate");
 

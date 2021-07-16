@@ -11,7 +11,6 @@
                 background-image: url('images/bg.png');
                 background-size: cover;
                 background-repeat: no-repeat;
-                /*padding-bottom: 15%; /*responsive*/
             }
 
             .buttonCon{
@@ -46,14 +45,9 @@
 
             .main {
                 background-color: #FFFFFF;
-                /*                position: absolute;*/
-                /*                top: 0; left: 20px; bottom: 0; right: 20px;*/
                 width: 620px;
                 height: 400px;
-                margin-left: 30%;/*
-                              
-                margin-top: 170px;
-                margin-left: 450px;*/
+                margin-left: 30%;
                 border-radius: 4.5em;
                 box-shadow: 0px 11px 22px 2px rgba(0, 0, 0, 0.44);
             }
@@ -199,7 +193,6 @@
     </head>
     <body>
         <%
-            //can only access page when logged in
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 
             if (session.getAttribute("password") == null || session.getAttribute("username") == null) {
@@ -228,31 +221,6 @@
                             <p class="sign2">760 6465</p>
                         </div>
                     </div>
-                    <%--
-                    <div class="container" style="display: flex; height: 50px;">
-                        <div style="width: 50%;">
-                            <p class="sign">Cashier</p>
-                        </div>
-                        <div style="flex-grow: 1;">
-                            <p class="sign2">789-1327</p>
-                        </div>
-                    </div>
-                    <div class="container" style="display: flex; height: 50px;">
-                        <div style="width: 50%;">
-                            <p class="sign">Security</p>
-                        </div>
-                        <div style="flex-grow: 1;">
-                            <p class="sign2">789-0061</p>
-                        </div>
-                    </div>
-                    <div class="container" style="display: flex; height: 50px;">
-                        <div style="width: 50%;">
-                            <p class="sign">Front Desk</p>
-                        </div>
-                        <div style="flex-grow: 1;">
-                            <p class="sign2">789-4792</p>
-                        </div>
-                    </div> --%>
                     <div class="container" style="display: flex; height: 50px;">
                         <div style="width: 50%;">
                             <p class="sign">Developers</p>

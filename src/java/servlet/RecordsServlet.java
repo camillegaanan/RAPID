@@ -65,7 +65,6 @@ public class RecordsServlet extends HttpServlet {
 
             String view = request.getParameter("view");
             request.setAttribute("getAlert", null);
-            //if download is selected
             if (view.equals("Download")) {
                 String check = request.getParameter("viewCheck");
                 ResultSet records = null;
@@ -111,7 +110,6 @@ public class RecordsServlet extends HttpServlet {
                 }
             }
 
-            //if clinick ung viewAll
             if (view.equals("View ALL Records")) {
                 String delete = null;
                 String searchFam = null;
@@ -129,7 +127,6 @@ public class RecordsServlet extends HttpServlet {
                             response);
                 }
             }
-            //if view todays
             if (view.equals("View Today's Records")) {
                 String delete = null;
                 String searchFam = null;
@@ -144,13 +141,11 @@ public class RecordsServlet extends HttpServlet {
                     request.getRequestDispatcher("viewToday.jsp").forward(
                             request, response);
                 } else {
-                    //walang record for the day
                     request.setAttribute("results", records);
                     request.getRequestDispatcher("viewToday.jsp").forward(
                             request, response);
                 }
             }
-            //if nagsearch/delete
             if (view.equals("Search")) {
                 model.DateObject d = (model.DateObject) request.
                         getServletContext().getAttribute("date");
@@ -321,8 +316,6 @@ public class RecordsServlet extends HttpServlet {
         private void addFooter(PdfWriter writer) {
             PdfPTable footer = new PdfPTable(3);
             try {
-                // set defaults
-                //            footer.setWidthPercentage(100);
                 footer.setWidths(new int[]{24, 2, 1});
                 footer.setTotalWidth(725);
                 footer.setLockedWidth(true);
@@ -330,26 +323,20 @@ public class RecordsServlet extends HttpServlet {
                 footer.getDefaultCell().setBorder(Rectangle.TOP);
                 footer.getDefaultCell().setBorderColor(BaseColor.LIGHT_GRAY);
 
-                // add copyright
                 footer.addCell(new Phrase("Date and Time: " +
                         new java.util.Date() + "\n" + getServletContext().
                                 getInitParameter("Footer"), new Font(
                         Font.FontFamily.HELVETICA, 10)));
-                //            footer.addCell(new Phrase("Date and Time: " + new java.util.Date() + "\n" + "copyright", new Font(Font.FontFamily.HELVETICA, 10) ));
-
-                // add current page count
                 footer.getDefaultCell().setHorizontalAlignment(
                         Element.ALIGN_RIGHT);
                 footer.addCell(new Phrase(String.format("Page %d of", writer.
                         getPageNumber()), new Font(Font.FontFamily.HELVETICA, 8)));
 
-                // add placeholder for total page count
                 PdfPCell totalPageCount = new PdfPCell(total);
                 totalPageCount.setBorder(Rectangle.TOP);
                 totalPageCount.setBorderColor(BaseColor.LIGHT_GRAY);
                 footer.addCell(totalPageCount);
 
-                // write page
                 PdfContentByte canvas = writer.getDirectContent();
                 canvas.beginMarkedContentSequence(PdfName.ARTIFACT);
                 footer.writeSelectedRows(0, -1, 34, 50, canvas);

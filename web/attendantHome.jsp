@@ -15,7 +15,6 @@
                 background-image: url('images/bg.png');
                 background-size: cover;
                 background-repeat: no-repeat;
-                /*padding-bottom: 15%; /*responsive*/
             }
             
             .up{
@@ -167,7 +166,6 @@
         
         <div class="c"></div>
         <%
-            //can only access page when logged in
             response.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
                 
             if(session.getAttribute("password")== null){

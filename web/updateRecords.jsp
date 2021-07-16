@@ -18,7 +18,6 @@
                 background-image: url('images/bg.png');
                 background-size: cover;
                 background-repeat: no-repeat;
-                /*padding-bottom: 15%; /*responsive*/
             }
 
             .up{

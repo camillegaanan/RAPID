@@ -59,7 +59,7 @@ public class NewPatientServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             HttpSession session = request.getSession();
-            boolean isAttendant = (session.getAttribute("password") != null); //true if attendant, false if admin
+            boolean isAttendant = (session.getAttribute("password") != null);
             String queryALL =
                     "SELECT * FROM PatientDB";
             Statement psALL = con.createStatement(
@@ -67,7 +67,7 @@ public class NewPatientServlet extends HttpServlet {
                     ResultSet.CONCUR_READ_ONLY);
 
             int patientID = 1;
-            if (request.getParameter("fromHome") != null) {//will display incoming patient id, command will come from Admin/Attendant Home
+            if (request.getParameter("fromHome") != null) {
                 String queryID =
                         "SELECT MAX(patientID) as currentID FROM patientDB";
                 Statement stmtID = con.createStatement();
@@ -93,7 +93,7 @@ public class NewPatientServlet extends HttpServlet {
                 request.setAttribute("getAlert", null);
             }
 
-            if (request.getParameter("createRecord") != null) { //will only attempt to insert if from newPatient jsp
+            if (request.getParameter("createRecord") != null) { 
                 Patient p = new Patient();
                 Attendant att = new Attendant(con);
 
@@ -330,8 +330,6 @@ public class NewPatientServlet extends HttpServlet {
         private void addFooter(PdfWriter writer) {
             PdfPTable footer = new PdfPTable(3);
             try {
-                // set defaults
-                //            footer.setWidthPercentage(100);
                 footer.setWidths(new int[]{24, 2, 1});
                 footer.setTotalWidth(530);
                 footer.setLockedWidth(true);
@@ -339,25 +337,21 @@ public class NewPatientServlet extends HttpServlet {
                 footer.getDefaultCell().setBorder(Rectangle.TOP);
                 footer.getDefaultCell().setBorderColor(BaseColor.LIGHT_GRAY);
 
-                // add copyright
                 footer.addCell(new Phrase("Date and Time: " +
                         new java.util.Date() + "\n" + getServletContext().
                                 getInitParameter("Footer"), new Font(
                         Font.FontFamily.HELVETICA, 10)));
                 
-                // add current page count
                 footer.getDefaultCell().setHorizontalAlignment(
                         Element.ALIGN_RIGHT);
                 footer.addCell(new Phrase(String.format("Page %d of", writer.
                         getPageNumber()), new Font(Font.FontFamily.HELVETICA, 8)));
 
-                // add placeholder for total page count
                 PdfPCell totalPageCount = new PdfPCell(total);
                 totalPageCount.setBorder(Rectangle.TOP);
                 totalPageCount.setBorderColor(BaseColor.LIGHT_GRAY);
                 footer.addCell(totalPageCount);
 
-                // write page
                 PdfContentByte canvas = writer.getDirectContent();
                 canvas.beginMarkedContentSequence(PdfName.ARTIFACT);
                 footer.writeSelectedRows(0, -1, 34, 50, canvas);

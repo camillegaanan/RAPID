@@ -63,29 +63,14 @@ public class EnterIDServlet extends HttpServlet {
                 ps.setString(1, id);
                 ResultSet rs = ps.executeQuery();
 
-//                int size = 0;
-//                if (rs != null) {
-//                    rs.last();
-//                    size = rs.getRow();
-//                    rs.first();
-//                }
-//                String transArr = "";
-//                for (int i = 0; i < size; i++) {
-//                    transArr += rs.getString("typeoftransaction") + " ";
-//                    rs.next();
-//                }
-//                rs.first();
                 if (rs.next()) {
-//                    request.setAttribute("transArr", transArr);
-//                    request.setAttribute("count", size);
                     request.setAttribute("results", rs);
                 } else {
-                    //no existing records for patientid
                     System.out.println("wala");
                 }
             }
 
-            if (request.getParameter("updateRec") != null) { //will only attempt to update if from updateRecords jsp
+            if (request.getParameter("updateRec") != null) { 
 
                 int getPatientID = Integer.parseInt(request.getParameter("id"));
 

@@ -20,7 +20,7 @@ public class ContactServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
-            boolean isAttendant = (session.getAttribute("password")!=null); //true if attendant, false if admin
+            boolean isAttendant = (session.getAttribute("password")!=null); 
             if (isAttendant) {
                 request.setAttribute("session", "attendantHome");
                 request.getRequestDispatcher("contact.jsp").include(request, response);

@@ -69,10 +69,10 @@ public class GetIDServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
-            boolean isAttendant = (session.getAttribute("password") != null); //true if attendant, false if admin
+            boolean isAttendant = (session.getAttribute("password") != null);
             boolean isUpdate = false;
 
-            if (request.getParameter("enterIDHome") != null) { //from admin or attendant Home
+            if (request.getParameter("enterIDHome") != null) {
                 if (isAttendant) {
                     request.setAttribute("session", "attendantHome");
                     request.getRequestDispatcher("enterId.jsp").include(request,
@@ -84,7 +84,7 @@ public class GetIDServlet extends HttpServlet {
                 }
             }
 
-            if (request.getParameter("enterID") != null) { //from enterid.jsp
+            if (request.getParameter("enterID") != null) {
                 Attendant att = new Attendant(con);
                 String id = request.getParameter("id");
                 ResultSet rs = att.enterPatientID(id);
@@ -98,7 +98,6 @@ public class GetIDServlet extends HttpServlet {
                     request.setAttribute("getAlert", null);
                     isUpdate = true;
                 } else {
-                    //no existing records for patientid
 
                     request.setAttribute("results", rs);
                     request.setAttribute("trans", "");
@@ -122,7 +121,7 @@ public class GetIDServlet extends HttpServlet {
                 }
             }
 
-            if (request.getParameter("updateRec") != null) { //will only attempt to update if from updateRecords jsp
+            if (request.getParameter("updateRec") != null) { 
                 isUpdate = true;
 
                 Attendant att = new Attendant(con);
@@ -323,8 +322,6 @@ public class GetIDServlet extends HttpServlet {
         private void addFooter(PdfWriter writer){
             PdfPTable footer = new PdfPTable(3);
             try {
-                // set defaults
-    //            footer.setWidthPercentage(100);
                 footer.setWidths(new int[]{24, 2, 1});
                 footer.setTotalWidth(530);
                 footer.setLockedWidth(true);
@@ -332,21 +329,17 @@ public class GetIDServlet extends HttpServlet {
                 footer.getDefaultCell().setBorder(Rectangle.TOP);
                 footer.getDefaultCell().setBorderColor(BaseColor.LIGHT_GRAY);
 
-                // add copyright
                 footer.addCell(new Phrase("Date and Time: " + new Date() + "\n" + getServletContext().getInitParameter("Footer"), new Font(Font.FontFamily.HELVETICA, 10) ));
-    //            footer.addCell(new Phrase("Date and Time: " + new java.util.Date() + "\n" + "copyright", new Font(Font.FontFamily.HELVETICA, 10) ));
+   
 
-                // add current page count
                 footer.getDefaultCell().setHorizontalAlignment(Element.ALIGN_RIGHT);
                 footer.addCell(new Phrase(String.format("Page %d of", writer.getPageNumber()), new Font(Font.FontFamily.HELVETICA, 8)));
 
-                // add placeholder for total page count
                 PdfPCell totalPageCount = new PdfPCell(total);
                 totalPageCount.setBorder(Rectangle.TOP);
                 totalPageCount.setBorderColor(BaseColor.LIGHT_GRAY);
                 footer.addCell(totalPageCount);
 
-                // write page
                 PdfContentByte canvas = writer.getDirectContent();
                 canvas.beginMarkedContentSequence(PdfName.ARTIFACT);
                 footer.writeSelectedRows(0, -1, 34, 50, canvas);

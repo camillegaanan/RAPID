@@ -61,7 +61,7 @@ public class LoginAdminServlet extends HttpServlet {
                 int err = ad.getError();
                 if (verify && err == 3) {
                     HttpSession session = request.getSession();
-                        session.setAttribute("username", uname); //sets the username as the session id
+                        session.setAttribute("username", uname); 
                         request.getRequestDispatcher("adminHome.jsp").forward(request, response);
                 } else if (!verify && err == 3){
                     request.getRequestDispatcher("error3.jsp").include(request, response);

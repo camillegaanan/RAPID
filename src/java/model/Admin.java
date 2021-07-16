@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package model;
 
 import com.itextpdf.text.BaseColor;
@@ -52,7 +48,6 @@ public class Admin extends Attendant {
         Statement psALL = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                 ResultSet.CONCUR_READ_ONLY);
         ResultSet records = psALL.executeQuery(queryALL);
-        //if nagsearch by date
         if (searchDate != null) {
             String encryptedDate = Security.encrypt(searchDate);
             String query =
@@ -61,10 +56,8 @@ public class Admin extends Attendant {
                     ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ps.setString(1, encryptedDate);
             ResultSet recordsDate = ps.executeQuery();
-            //records for that day na sinearch
             return recordsDate;
         }
-        //if nagsearch by fam name
         if (searchFam != null) {
 
             String encryptedFam = Security.encrypt(searchFam);
@@ -74,10 +67,8 @@ public class Admin extends Attendant {
                     ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ps.setString(1, encryptedFam);
             ResultSet recordsFam = ps.executeQuery();
-            //records for that day na sinearch
             return recordsFam;
         }
-        //if nagsearch by type of ultrasound
         if (searchType != null) {
             String encryptedType = Security.encrypt(searchType);
             String query =
@@ -86,10 +77,8 @@ public class Admin extends Attendant {
                     ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ps.setString(1, encryptedType);
             ResultSet recordsType = ps.executeQuery();
-            //records for that type of ultrasound na sinearch
             return recordsType;
         }
-        //if nagdelete
         if (delete != null) {
 
             String DeleteRec =
@@ -109,7 +98,6 @@ public class Admin extends Attendant {
             }
         }
 
-        //if viewall 
         return records;
     }
 
@@ -126,7 +114,6 @@ public class Admin extends Attendant {
         ps.setString(1, encryptedDate);
         ResultSet records = ps.executeQuery();
 
-        //if nagsearch by fam name
         if (searchFam != null) {
 
             String encryptedFam = Security.encrypt(searchFam);
@@ -137,10 +124,8 @@ public class Admin extends Attendant {
             psSF.setString(1, encryptedFam);
             psSF.setString(2, encryptedDate);
             ResultSet recordsFam = psSF.executeQuery();
-            //records for that family name na sinearch
             return recordsFam;
         }
-        //if nagsearch by type of ultrasound
         if (searchType != null) {
             String encryptedType = Security.encrypt(searchType);
             String queryST =
@@ -150,10 +135,8 @@ public class Admin extends Attendant {
             psST.setString(1, encryptedType);
             psST.setString(2, encryptedDate);
             ResultSet recordsType = psST.executeQuery();
-            //records for that type of ultrasound na sinearch
             return recordsType;
         }
-        //if nagdelete
         if (delete != null) {
 
             String DeleteRec =
@@ -185,13 +168,11 @@ public class Admin extends Attendant {
         java.sql.Date date = new java.sql.Date(millis);
 
         String desktopPath = System.getProperty("user.home") +
-                "/Desktop/UTZ Records"; //OG
-//                String desktopPath = "D:/Media/Desktop/UTZ Records"; //for testing
+                "/Desktop/UTZ Records";
         String path = desktopPath.replace("\\", "/");
         String path2 = "";
         File file = new File(System.getProperty("user.home") +
-                "\\Desktop\\UTZ Records"); //comment this back after
-//                File file = new File("D:\\Media\\Desktop\\UTZ Records"); //for testing only 
+                "\\Desktop\\UTZ Records");
         file.mkdir();
 
         Paragraph type = new Paragraph();
@@ -204,7 +185,6 @@ public class Admin extends Attendant {
 
             type.add("List of transactions: All Records");
 
-            //to select columns that will be printed
             String query =
                     "SELECT PatientDB.patientID AS \"ID\", PatientDB.familyName AS \"Family Name\", PatientDB.firstName AS \"First Name\", PatientDB.middleName AS \"Middle Name\", PatientDB.sex AS \"Sex\", PatientDB.birthday AS \"Birthday\", PatientDB.contactNum AS \"Contact No.\", PatientDB.address AS \"Address\", PatientDB.email AS \"Email\", RecordDB.typeoftransaction AS \"Type of Ultrasound\", RecordDB.price AS \"Price\", RecordDB.datetoday AS \"Date\" FROM PatientDB INNER JOIN RecordDB ON patientDB.patientID=recorddb.patientID";
             PreparedStatement ps = con.prepareStatement(query,
@@ -215,7 +195,7 @@ public class Admin extends Attendant {
 
             Font tableFont = new Font(Font.FontFamily.HELVETICA, 10);
             Font boldFont = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD);
-            for (int i = 1; i <= colCount; i++) { //returns the attribute
+            for (int i = 1; i <= colCount; i++) {
                 PdfPCell cell = new PdfPCell();
                 Paragraph p = new Paragraph(records.getMetaData().
                         getColumnName(i), boldFont);
@@ -259,9 +239,8 @@ public class Admin extends Attendant {
 
             type.add("List of transactions: " + date);
 
-            String encryptDate = Security.encrypt(date.toString()); //encrypts date to match table contents
+            String encryptDate = Security.encrypt(date.toString());
 
-            //to select columns that will be printed
             String query =
                     "SELECT PatientDB.patientID AS \"ID\", PatientDB.familyName AS \"Family Name\", PatientDB.firstName AS \"First Name\", PatientDB.middleName AS \"Middle Name\", PatientDB.sex AS \"Sex\", PatientDB.birthday AS \"Birthday\", PatientDB.contactNum AS \"Contact No.\", PatientDB.address AS \"Address\", PatientDB.email AS \"Email\", RecordDB.typeoftransaction AS \"Type of Ultrasound\", RecordDB.price AS \"Price\", RecordDB.datetoday AS \"Date\" FROM PatientDB INNER JOIN RecordDB ON patientDB.patientID=recorddb.patientID WHERE datetoday = ?";
             PreparedStatement ps = con.prepareStatement(query,
@@ -273,7 +252,7 @@ public class Admin extends Attendant {
 
             Font tableFont = new Font(Font.FontFamily.HELVETICA, 10);
             Font boldFont = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD);
-            for (int i = 1; i <= colCount; i++) { //returns the attribute
+            for (int i = 1; i <= colCount; i++) {
                 PdfPCell cell = new PdfPCell();
                 Paragraph p = new Paragraph(records.getMetaData().
                         getColumnName(i), boldFont);
@@ -312,7 +291,7 @@ public class Admin extends Attendant {
         }
 
         Document doc =
-                new Document(PageSize.LETTER.rotate(), 30, 30, 30, 53); //sets page to landscape and sets the margins
+                new Document(PageSize.LETTER.rotate(), 30, 30, 30, 53); 
 
         try {
             PdfWriter writer = PdfWriter.getInstance(doc,

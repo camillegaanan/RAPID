@@ -183,7 +183,6 @@
                 padding: 8px;
                 font-family: 'Montserrat', sans-serif;
                 border-collapse: collapse;
-                /*                border-radius: 0.8em;*/
                 width: 95%;
                 text-align: center;
             }
@@ -353,7 +352,6 @@
         </script>
 
         <%
-            //can only access page when logged in
             response.setHeader("Cache-Control",
                     "no-cache, no-store, must-revalidate");
 
