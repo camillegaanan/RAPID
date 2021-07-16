@@ -50,9 +50,9 @@ public class EnterIDServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
-            boolean isAttendant = (session.getAttribute("password") != null); //true if attendant, false if admin
+            boolean isAttendant = (session.getAttribute("password") != null);
 
-            if (request.getParameter("enterID") != null) { //from enterid.jsp
+            if (request.getParameter("enterID") != null) {
                 String id = request.getParameter("id");
                 String query
                         = "SELECT * FROM PatientDB INNER JOIN RecordDB ON patientDB.patientID=recorddb.patientID where recorddb.patientID = ?";
@@ -65,8 +65,6 @@ public class EnterIDServlet extends HttpServlet {
 
                 if (rs.next()) {
                     request.setAttribute("results", rs);
-                } else {
-                    System.out.println("wala");
                 }
             }
 
